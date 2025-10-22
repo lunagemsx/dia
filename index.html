@@ -1,464 +1,438 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <img src="https://raw.githubusercontent.com/lunagemsx/dia/main/diamond.jpg" alt="Diamond">
-<img src="https://raw.githubusercontent.com/lunagemsx/dia/main/images/fanny.jpg" alt="Diamond">
-    <img src="https://raw.githubusercontent.com/lunagemsx/dia/main/images/kpay.png" alt="Diamond">
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LunaGemX — Diamonds</title>
+  <link rel="icon" type="image/x-icon" href="logo.jpg" />
+  <style>
+    :root{
+      --bg1:#e2ecfa;
+      --bg2:#b4d8fc;
+      --glass-bg: rgba(255,255,255,0.22);
+      --glass-border: rgba(255,255,255,0.28);
+      --accent:#4dce15;
+      --card-max-w:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Arial,system-ui,-apple-system; background:linear-gradient(135deg,var(--bg1),var(--bg2)); color:#111;}
 
-    <meta charset="UTF-8" />
-    <title>LunaGem𝕩</title>
-    <link rel="icon" type="imag/x-icon" href="/logo.jpg" />
-    <style>
-      body {
-        margin: 0;
-        font-family: "Arial", sans-serif;
-        background: linear-gradient(135deg, #e2ecfa 0%, #b4d8fc 100%);
-        min-height: 100vh;
-      }
+    /* Center page horizontally, allow vertical scroll if needed */
+    .page {
+      display:flex;
+      justify-content:center;
+      padding:20px;
+    }
 
-      .glass-wrapper {
-        max-width: 1200px;
-        margin: 20px auto;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 16px;
-        backdrop-filter: blur(12px);
-        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
-      }
+    /* MAIN CARD */
+    .glass-wrapper{
+      width:100%;
+      max-width:var(--card-max-w);
+      background:var(--glass-bg);
+      border-radius:16px;
+      padding:18px;
+      border:1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 40px rgba(31,38,135,0.15);
+      /* let height be automatic (no forced min-height) so no big blank below */
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      align-items:stretch;
+    }
 
-      h1 {
-        text-align: center;
-        color: #226595;
-        margin-bottom: 20px;
-      }
+    h1{ text-align:center; color:#226595; margin:6px 0 0 0; font-size:20px; }
 
-      .prices-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        justify-content: center;
-      }
+    /* GRID: diamonds */
+    .prices-container{
+      display:grid;
+      gap:18px;
+      /* ensure items pack to top and don't leave gaps before poster-row */
+      align-content:start;
+      /* default 3 columns on wide screens */
+      grid-template-columns: repeat(3, 1fr);
+    }
 
-      .price-card {
-        background: rgba(255, 255, 255, 0.35);
-        border-radius: 12px;
-        padding: 15px;
-        flex: 1 1 220px;
-        max-width: 260px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
+    .price-card{
+      background: rgba(255,255,255,0.4);
+      border-radius:12px;
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:space-between;
+      min-height:110px;
+      box-shadow: 0 6px 18px rgba(14, 30, 70, 0.06);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .price-card:hover{ transform:translateY(-6px); box-shadow:0 12px 30px rgba(14,30,70,0.12); }
 
-      .price-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-      }
+    .price-card img.icon-diamond{ width:38px; height:38px; margin-bottom:8px; opacity:0.9; }
+    .diamond-text{ font-weight:700; color:#5fbdf6; margin-bottom:6px; font-size:14px; text-align:center; }
+    .price-color{ font-weight:800; color:#233; margin-bottom:8px; font-size:15px; }
+    .buy-btn{ background:var(--accent); color:#fff; padding:8px 14px; border-radius:8px; text-decoration:none; font-weight:700; box-shadow:0 6px 18px rgba(76,204,21,0.15); }
 
-      .price-card img.icon-diamond {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 10px;
-      }
+    /* Poster row sits BELOW the grid naturally (no absolute positioning) */
+    .poster-row{
+      display:flex;
+      gap:18px;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:6px;
+      padding:18px;
+      background: rgba(255,255,255,0.06);
+      border-radius:12px;
+    }
+    .poster-card{
+      width:140px;
+      height:140px;
+      border-radius:16px;
+      overflow:hidden;
+      border:1.5px solid rgba(160,200,245,0.24);
+      box-shadow: 0 8px 28px rgba(31,38,135,0.06);
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .poster-card img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-      .diamond-text {
-        font-weight: bold;
-        color: #83befa;
-        margin-bottom: 5px;
-        text-align: center;
-      }
+    /* contact area inside poster-row middle */
+    .poster-center{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      align-items:center;
+      justify-content:center;
+      color:#0d2340;
+      font-weight:600;
+    }
+    .poster-center .row{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .uc-btn{
+      padding:12px 18px;
+      border-radius:10px;
+      background:linear-gradient(90deg,#2ac7d8,#226595);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow:0 8px 20px rgba(34,101,149,0.14);
+    }
 
-      .price-color {
-        font-weight: bold;
-        color: #303030;
-        margin-bottom: 10px;
-      }
+    /* Floating emotes removed for now (keeps mobile clean) */
+    .emote-container{ display:none; }
 
-      .buy-btn {
-        display: inline-block;
-        text-decoration: none;
-        background: #4dce15;
-        color: #fff;
-        padding: 8px 16px;
-        border-radius: 8px;
-        font-weight: bold;
-        transition: background 0.3s ease;
-      }
+    /* Responsive breakpoints */
+    @media (max-width: 1024px){
+      .prices-container{ grid-template-columns: repeat(2, 1fr); }
+      .poster-row{ gap:12px; padding:14px; }
+      .poster-card{ width:120px; height:120px; }
+    }
 
-      .buy-btn:hover {
-        background: #3db012;
-      }
+    @media (max-width: 520px){
+      .glass-wrapper{ padding:14px; border-radius:14px; }
+      .prices-container{ grid-template-columns: repeat(2, 1fr); gap:12px; }
+      .price-card{ padding:12px; min-height:100px; }
+      .poster-row{ flex-direction:row; gap:12px; padding:12px; }
+      .poster-card{ width:110px; height:110px; }
+      h1{ font-size:18px; }
+      .diamond-text{ font-size:13px; }
+      .price-color{ font-size:14px; }
+    }
 
-      .contact {
-        margin-top: 30px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-        text-align: center;
-      }
+    /* very small phones: single column (if desired) */
+    @media (max-width: 360px){
+      .prices-container{ grid-template-columns: repeat(1, 1fr); }
+    }
+.poster-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+  margin-top: 15px;
+  padding: 18px 20px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.06));
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
 
-      .contact img {
-        width: 32px;
-        height: 32px;
-      }
+/* Left & right posters */
+.poster-card {
+  flex: 1;
+  max-width: 180px;
+  aspect-ratio: 1/1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  border: 1px solid rgba(200,200,255,0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
 
-      .contact a {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        text-decoration: none;
-        color: #303030;
-        font-weight: bold;
-      }
+.poster-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
 
-      @media (max-width: 800px) {
-        .prices-container {
-          flex-direction: column;
-          align-items: center;
-        }
-      }
-    </style>
-  </head>
-  <body>
+.poster-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Center text area */
+.poster-center {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  color: #0d2340;
+}
+
+.poster-center .row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.poster-center span {
+  font-weight: 600;
+  color: #06344d;
+}
+
+.uc-btn {
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #2ac7d8, #226595);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(34,101,149,0.15);
+  transition: background 0.25s ease;
+}
+
+.uc-btn:hover {
+  background: linear-gradient(90deg, #24b5c7, #1c507a);
+}
+
+/* 📱 Responsive adjustments */
+@media (max-width: 768px) {
+  .poster-row {
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px;
+  }
+  .poster-card {
+    max-width: 220px;
+    width: 100%;
+  }
+  .poster-center {
+    gap: 8px;
+  }
+  .poster-center .row img {
+    width: 34px;
+    height: 22px;
+  }
+  .uc-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  
+
+  <div class="page">
+    
     <div class="glass-wrapper">
-      <div class="uc-section"></div>
-
-      <div class="pagination-wrapper"></div>
+      
       <h1>စိန်ဈေးနှုန်းများ</h1>
 
       <div class="prices-container">
-        <!-- Diamond List Full Version -->
+        <!-- full list (example entries) -->
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">86 Diamonds</div>
           <div class="price-color">4,650 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">172 Diamonds</div>
           <div class="price-color">9,500 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">257 Diamonds</div>
           <div class="price-color">14,350 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">343 Diamonds</div>
           <div class="price-color">18,900 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">429 Diamonds</div>
           <div class="price-color">24,000 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">514 Diamonds</div>
           <div class="price-color">29,000 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">600 Diamonds</div>
           <div class="price-color">34,000 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">706 Diamonds</div>
           <div class="price-color">40,800 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">878 Diamonds</div>
           <div class="price-color">50,000 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">963 Diamonds</div>
           <div class="price-color">55,000 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">1,049 Diamonds</div>
           <div class="price-color">60,000 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">1,135 Diamonds</div>
           <div class="price-color">65,000 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">1,412 Diamonds</div>
           <div class="price-color">80,700 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">1,669 Diamonds</div>
           <div class="price-color">90,900 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">2,118 Diamonds</div>
           <div class="price-color">180,000 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">2,375 Diamonds</div>
           <div class="price-color">132,900 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">2,901 Diamonds</div>
           <div class="price-color">163,500 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">3,688 Diamonds</div>
           <div class="price-color">200,000 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">4,032 Diamonds</div>
           <div class="price-color">212,000 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">5,532 Diamonds</div>
           <div class="price-color">300,000 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="price-card">
-          <img src="/diamond-removebg-preview.png" class="icon-diamond" />
+          <img src="diamond-removebg-preview.png" class="icon-diamond" alt="diamond">
           <div class="diamond-text">9,288 Diamonds</div>
           <div class="price-color">492,000 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+          <a class="buy-btn" href="https://t.me/lunagemx" target="_blank" rel="noopener">Buy Now</a>
         </div>
-        <div class="price-card">
-          <img src="/weekly.webp" class="icon-diamond" />
-          <div class="diamond-text">WEEKLY PASS</div>
-          <div class="price-color">5,900 MMK</div>
-          <a href="https://t.me/lunagemx" class="buy-btn">Buy Now</a>
+
+      </div> <!-- end prices-container -->
+
+      <!-- posters + contact row (inside normal flow, below grid) -->
+      <div class="poster-row" aria-hidden="false">
+        <div class="poster-card"><img src="anime.jpg" alt="poster 1"></div>
+
+        <div class="poster-center">
+          <div class="row">
+            <img src="kpay.png" alt="kpay" style="width:36px;height:24px;border-radius:4px">
+            <img src="wave.png" alt="wave" style="width:36px;height:24px;border-radius:4px">
+            <span style="font-weight:700;margin-left:6px;color:#08304a"></span>
+          </div>
+
+          <div style="margin-top:8px">
+            <a class="uc-btn" href="new.html" target="_blank" rel="noopener">UC စျေးနှုန်းများ</a>
+          </div>
+
+          <div style="margin-top:8px;font-size:13px;color:#08304a">@lunagemx • 24h support
+            Waiting-Time 1-3 min
+          </div>
         </div>
+
+        <div class="poster-card"><img src="fanny.jpg" alt="poster 2"></div>
       </div>
-      <div class="poster-row">
-        <div class="poster-card">
-          <img src="/anime.jpg" alt="Left Poster" />
-        </div>
-        <div class="poster-card">
-          <img src="/fanny.jpg" alt="Right Poster" />
-        </div>
-      </div>
-      <style>
-        .poster-row {
-          display: flex;
-          justify-content: space-between;
-          position: absolute;
-          bottom: 50px;
-          left: 60px;
-          right: 60px;
-          width: calc(100% - 120px);
-          z-index: 10;
-        }
-        .poster-card {
-          background: rgba(255, 255, 255, 0.28);
-          border-radius: 22px;
-          box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
-          backdrop-filter: blur(10px);
-          width: 220px;
-          height: 200px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          border: 1.5px solid rgba(160, 200, 245, 0.32);
-          transition: box-shadow 0.3s;
-        }
-        .poster-card img {
-          width: 92%;
-          height: 92%;
-          object-fit: cover;
-          border-radius: 18px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .poster-card:hover {
-          box-shadow: 0 12px 38px rgba(30, 90, 200, 0.35);
-        }
-        @media (max-width: 900px) {
-          .poster-row {
-            flex-direction: column;
-            align-items: center;
-            left: auto;
-            right: auto;
-            width: 100%;
-          }
-          .poster-card {
-            margin-bottom: 24px;
-          }
-        }
-      </style>
-      <div class="contact">
-        <div
-          style="
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold',
-              sans-serif;
-          "
-        >
-          Waiting-Time 1-3 min
-        </div>
-        <img src="/kpay.png" alt="KPay" />
-        <img src="/wave.png" alt="Wave" />
-        <a href="https://t.me/lunagemx">
-          <img src="/Telegram_logo.svg.png" alt="Telegram" /> @lunagemx
-          <a href="new.html"><button class="uc-btn">UC စျေးနှုန်းများ</button></a>
-        </a>
-      </div>
-    </div>
-    <button
-      id="darkModeToggle"
-      style="
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 8px 12px;
-        z-index: 1000;
-      "
-    >
-      🌙 Dark Mode
-    </button>
 
-    <script>
-      const toggleBtn = document.getElementById("darkModeToggle");
-      toggleBtn.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-      });
-    </script>
-
-    <style>
-      body.dark-mode {
-        background: #111;
-        color: #eee;
-      }
-      body.dark-mode .glass-wrapper {
-        background: rgba(20, 20, 20, 0.6);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
-      }
-      body.dark-mode .price-card {
-        background: rgba(40, 40, 40, 0.6);
-      }
-      body.dark-mode .buy-btn {
-        background: #0f9d58;
-      }
-    </style>
-    <div class="emote-container">
-      <img src="/mlbblogo10.jpeg" class="floating-emote" />
-      <img src="/mlbblogo13.jpeg" class="floating-emote" />
-      <img src="/mlbblogo14.jpeg" class="floating-emote" />
-    </div>
-
-    <style>
-      .emote-container {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        pointer-events: none;
-        overflow: hidden;
-        z-index: 999;
-      }
-      .floating-emote {
-        position: absolute;
-        bottom: -50px;
-        width: 50px;
-        animation: floatUp linear infinite;
-      }
-      .floating-emote:nth-child(1) {
-        left: 10%;
-        animation-duration: 7s;
-      }
-      .floating-emote:nth-child(2) {
-        left: 50%;
-        animation-duration: 10s;
-      }
-      .floating-emote:nth-child(3) {
-        left: 80%;
-        animation-duration: 12s;
-      }
-
-      @keyframes floatUp {
-        0% {
-          transform: translateY(0) scale(1);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(-120vh) scale(1.2);
-          opacity: 0;
-        }
-      }
-
-      .pagination-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        margin: 28px 0 0 0;
-        padding: 15px 0;
-        background: rgba(255, 255, 255, 0.32);
-        border-radius: 16px;
-        box-shadow: 0 4px 22px rgba(31, 38, 135, 0.09);
-        max-width: 400px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .uc-section {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-top: 36px;
-        margin-bottom: 8px;
-      }
-
-      .uc-btn {
-        padding: 15px 38px;
-        font-size: 19px;
-        font-weight: bold;
-        color: #fff;
-        background: linear-gradient(90deg, #2ac7d8 0%, #226595 100%);
-        border-radius: 15px;
-        border: none;
-        box-shadow: 0 5px 20px rgba(68, 207, 243, 0.17);
-        cursor: pointer;
-        transition: background 0.25s, box-shadow 0.25s;
-      }
-
-      .uc-btn:hover {
-        background: linear-gradient(90deg, #226595 0%, #2ac7d8 100%);
-        box-shadow: 0 9px 28px rgba(68, 207, 243, 0.27);
-      }
-    </style>
-  </body>
+    </div> <!-- end glass-wrapper -->
+  </div> <!-- end page -->
+</body>
 </html>
