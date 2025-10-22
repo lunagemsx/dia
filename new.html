@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LunaGemx PUBG UC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#0b1220; --bg2:#0f1724;
+      --glass-bg: rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.12);
+      --accent:#ffd166;    /* price - gold */
+      --accent-2:#00d1ff;  /* UC - blue */
+      --radius:24px;
+      --card-w:720px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'Poppins','Noto Sans Myanmar',system-ui,sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:#fff}
+
+    .stage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+
+    .poster{
+      width:calc(var(--card-w));max-width:92vw;aspect-ratio:1080/1350;border-radius:32px;position:relative;
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));overflow:hidden;
+      /* stronger visible border ring */
+      box-shadow:0 0 0 6px rgba(255,255,255,0.02) inset, 0 8px 40px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.06);padding:32px;display:flex;flex-direction:column;gap:16px;
+    }
+
+    .poster::after{content:'';position:absolute;inset:-6px;border-radius:36px;background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:0.04;filter:blur(10px);pointer-events:none}
+
+    .poster::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 10% 20%,rgba(0,209,255,0.06),transparent 10%),radial-gradient(circle at 90% 80%,rgba(255,209,102,0.04),transparent 10%);pointer-events:none;mix-blend-mode:overlay}
+
+    .glass{margin:auto 0;width:100%;padding:22px;border-radius:var(--radius);background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(12px) saturate(120%);-webkit-backdrop-filter:blur(12px) saturate(120%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.03),0 8px 30px rgba(2,6,23,0.45);display:flex;flex-direction:column;gap:12px;position:relative;z-index:2}
+
+    .header{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo img{width:58px;height:58px;border-radius:12px;object-fit:cover;display:block}
+    .brand h1{margin:0;font-size:18px;letter-spacing:0.2px}
+    .badge{font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.04)}
+
+    .hero{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+    .title{font-size:40px;font-weight:800;line-height:1;color:#fff}
+    .subtitle{font-size:14px;color:rgba(255,255,255,0.85);margin-top:6px}
+
+    .packages{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+    .chip{padding:12px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);min-width:140px;display:flex;flex-direction:column;gap:6px}
+
+    /* UC + price color split */
+    .chip strong{font-size:16px;display:flex;justify-content:space-between;align-items:center}
+    .chip strong span.uc{color:var(--accent-2);font-weight:800;text-shadow:0 1px 0 rgba(0,0,0,0.45)}
+    .chip strong span.price{color:var(--accent);font-weight:700;text-shadow:0 1px 0 rgba(0,0,0,0.45)}
+    .chip span{font-size:13px;color:rgba(255,255,255,0.85)}
+
+    .chip.best{background:linear-gradient(180deg,var(--accent),#ffb84d);color:#111;border:none;box-shadow:0 6px 20px rgba(255,177,77,0.15)}
+
+    .pay-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
+    .pay-row img{width:64px;height:40px;object-fit:contain;border-radius:6px;background:transparent;padding:2px;display:block}
+    .pay-row div{font-size:13px;color:rgba(255,255,255,0.85);align-self:center}
+
+    .cta{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap;}
+    .btn{padding:12px 18px;border-radius:999px;font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#111;border:none;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,0.35);display:inline-flex;align-items:center;gap:10px}
+    .btn a{color:inherit;text-decoration:none}
+    .contact{font-size:13px;color:rgba(255,255,255,0.9)}
+    .footer{font-size:12px;color:rgba(255,255,255,0.7);margin-top:8px}
+
+    .mock{width:160px;height:280px;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);display:grid;place-items:center}
+    .mock img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .credit{position:absolute;left:28px;bottom:18px;font-size:11px;color:rgba(255,255,255,0.18)}
+
+    @media(max-width:600px){
+      :root{--card-w:420px}
+      .title{font-size:28px}
+      .logo img{width:48px;height:48px}
+      .glass{padding:16px}
+      .poster{padding:18px}
+      .pay-row img{width:48px;height:30px}
+      .mock{width:120px;height:220px}
+    }
+    .last-price{
+      color: #0b1220;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="poster" role="article" aria-label="PUBG UC glass poster">
+      <div class="corner-deco" style="position:absolute;right:28px;top:28px;font-weight:700;background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);z-index:3">Instant Delivery</div>
+      <div class="glass">
+        <div class="header">
+          <div class="brand">
+            <div class="logo"><img src="/539411445_1328851138827396_1641689423742296200_n.jpg" alt="LunaGemX"></div>
+            <div>
+              <h1>LunaGemX</h1>
+              <div style="font-size:12px;color:rgba(255,255,255,0.75)">Diamond UCများ စိတ်ချစွာ၀ယ်ယူအားပေးလို့ရပါတယ်</div>
+            </div>
+          </div>
+          <div class="badge pos">Trusted Seller</div>
+        </div>
+
+        <div class="hero">
+          <div style="flex:1">
+            <div class="title">PUBG UC အမြန်ရောင်း</div>
+            <div class="subtitle">အရည်အသွေးမြင့် — လုံခြုံမှုအပြည့် — အမြန်ဆောင်ခြင်း</div>
+
+            <div class="packages" style="margin-top:14px">
+              <div class="chip"><strong><span class="uc">60 UC</span><span class="price">4200 ks</span></strong><span>2min — Fast delivery</span></div>
+              <div class="chip"><strong><span class="uc">120 UC</span><span class="price">8400 ks</span></strong><span>2min — Fast delivery</span></div>
+              <div class="chip"><strong><span class="uc">325 UC</span><span class="price">19600 ks</span></strong><span>2min — Fast delivery</span></div>
+              <div class="chip"><strong><span class="uc">385 UC</span><span class="price">23500 ks</span></strong><span>2min — Fast delivery</span></div>
+              <div class="chip"><strong><span class="uc">660 UC</span><span class="price">39000 ks</span></strong><span>2min — Fast delivery</span></div>
+              <div class="chip"><strong><span class="uc">720 UC</span><span class="price">43500 ks</span></strong><span>2min — Fast delivery</span></div>
+              <div class="chip"><strong><span class="uc">985 UC</span><span class="price">59000 ks</span></strong><span>2min — Fast delivery</span></div>
+              <div class="chip"><strong><span class="uc">1800 UC</span><span class="price">99000 ks</span></strong><span>2min — Fast delivery</span></div>
+
+              <div class="chip best"><strong><span class="uc">3850 UC</span><br><span class="last-price" style="color: #0f1724; margin-left: 10px; font-family: monospace;">190,000 ks</span></strong><span  style="color: rgb(18, 35, 56); font-family: monospace; font-size: 17px;">Best Value ⭐</span></div>
+              <div class="chip best"><strong><span class="uc">8100 UC</span><br><span class="last-price" style="color: #0b1220; margin-left: 10px; font-family: monospace;">390,000 ks</span></strong><span style="color: black; font-family: monospace; font-size: 17px;">Best Value ⭐</span></div>
+            </div>
+
+            <div class="pay-row" style="margin-top:12px">
+              <img src="/kpay.png" alt="KPay logo">
+              <img src="/wave.png" alt="Wave Pay logo">
+              <div>KPay • Wave Pay</div>
+            </div>
+
+            <div class="cta">
+              <a class="btn" href="https://t.me/lunagemx" style="text-decoration: none;" target="_blank" rel="noopener">📩 ဝယ်မယ် — Telegram</a>
+              <a class="btn" href="index.html" style="text-decoration: none;">MLBB - DIAစျေးနှုန်းများ</a>
+              
+              <div class="contact">Telegram: @lunagemx<br><span style="font-size:12px;color:rgba(255,255,255,0.65)">Delivery: 1–3 မိနစ် • 24h support</span></div>
+            </div>
+
+            <div class="footer"></div>
+          </div>
+
+          <div style="width:180px;display:flex;align-items:center;justify-content:center">
+            <div class="mock">
+              <img src="/dn5mgoglt1801.png" alt="PUBG UC Poster">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="credit"></div>
+    </div>
+  </div>
+</body>
+</html>

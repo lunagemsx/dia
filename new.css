@@ -1,0 +1,86 @@
+/* style.css */
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: url('mlbb.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  overflow-x: hidden;
+  animation: bgmove 8s cubic-bezier(.44,.22,.77,.86) infinite alternate;
+}
+@keyframes bgmove {
+  0% { background-position: center center; filter: brightness(1) saturate(1.2); }
+  40% { background-position: 60% 40%; filter: brightness(1.09) saturate(1.35); }
+  70% { background-position: 44% 58%; filter: brightness(1.03) saturate(1.2); }
+  100% { background-position: center right; filter: brightness(1.13) saturate(1.46); }
+}
+/* Overlay glow for fantasy effect */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse at 75% 40%, rgba(181,78,255,0.26) 0%, transparent 80%),
+              radial-gradient(ellipse 50% 68%, rgba(45,196,255,0.23) 0%, transparent 70%);
+  mix-blend-mode: lighten;
+  opacity: 0.9;
+  animation: overlayGlow 5s ease-in-out infinite alternate;
+}
+@keyframes overlayGlow {
+  0% { opacity: 0.9; }
+  100% { opacity: 1; }
+}
+
+/* Main content layering */
+.main-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Glass wrapper styles */
+.glass-wrapper {
+  width: 98vw;
+  max-width: 1120px;
+  padding: 24px 8px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.12);
+  border: 2px solid rgba(198,198,255,0.22);
+  box-shadow: 0 8px 32px 0 rgba(70, 45, 196, 0.18);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  margin: 40px auto;
+  overflow: hidden;
+}
+.glass-wrapper::after {
+  content: "";
+  position: absolute;
+  left:20px; top:10px; right:20px; bottom:10px;
+  background: linear-gradient(135deg, rgba(181,78,255,0.08) 0%, rgba(45,196,255,0.08) 100%);
+  pointer-events: none;
+  border-radius: inherit;
+  filter: blur(7px) opacity(0.6);
+  z-index: -1;
+  animation: glassFlare 5s ease-in-out infinite alternate;
+}
+@keyframes glassFlare {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* The rest of your UI styles from old CSS (img-container, logo, prices, etc) remain the same */
+/* ... paste all your glass UI/div styles, price-item, .sein, .contact, .weekly, responsive, etc ... */
+
+.mlbb{
+ width: 80%;
+}

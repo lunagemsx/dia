@@ -1,0 +1,365 @@
+body,
+.glass-wrapper {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #e2ecfa 0%, #b4d8fc 100%);
+  background: url("mlbb.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Main iOS Glass */
+.glass-wrapper {
+  width: 100%;
+  min-height: 50vh;
+  max-width: 100%;
+  padding: 24px 8px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1.5px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header & Logo container */
+.img-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin: 0 0 0 auto;
+  object-fit: cover;
+}
+
+.glass-prices-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  width: 100%;
+  margin-top: 18px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.glass-prices {
+  flex: 1 1 260px;
+  min-width: 210px;
+  max-width: 100%;
+}
+
+.price-item {
+  padding: 10px 10px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.32);
+  border-radius: 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 10px rgba(31, 38, 135, 0.03);
+  display: flex;
+  align-items: center;
+}
+.icon-diamond {
+  width: 36px;
+  height: 36px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+.diamond-text {
+  font-size: 1rem;
+  color: #83befa;
+  font-weight: bold;
+  margin-right: 8px;
+  font-family: monospace;
+}
+.price-color {
+  font-size: 1.4rem;
+  color: #303030;
+  font-weight: bold;
+  margin-left: 8px;
+  letter-spacing: 1px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Contact info - RIGHT align desktop/tablet */
+.contact {
+  display: flex;
+  align-items: center;
+  width: auto;
+  margin-left: auto;
+  margin-top: 18px;
+}
+
+.telegram {
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+  color: #303030;
+  text-decoration: none;
+  font-size: 1rem;
+}
+.tg-logo {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  font-family: monospace;
+}
+
+/* Responsive - phone */
+@media (max-width: 800px) {
+  .glass-wrapper {
+    padding: 12px 2vw;
+    border-radius: 10px;
+    width: 100vw;
+    min-width: 0;
+  }
+  .img-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+  h1 {
+    font-size: 1.18rem;
+    margin-bottom: 8px;
+  }
+  .glass-prices-row {
+    flex-direction: column;
+    gap: 0;
+    margin-top: 10px;
+  }
+  .glass-prices {
+    min-width: 0;
+    width: 100%;
+  }
+  .price-item {
+    font-size: 10px;
+    padding: 8px 6px;
+    margin: 5px 0;
+    border-radius: 10px;
+  }
+
+  .logo {
+    width: 32px;
+    height: 32px;
+    margin: 0;
+  }
+  /* Contact info - LEFT align phone */
+  .contact {
+    margin-left: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 14px;
+    width: 100%;
+  }
+  .telegram {
+    margin-left: 0;
+    font-size: 0.95rem;
+    margin-top: 4px;
+  }
+  .tg-logo {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.icon-diamond {
+  width: 65px;
+  height: 65px;
+}
+div {
+  border-radius: 1em;
+  perspective: 600px;
+  box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.25),
+    0 0.02125em 0.06125em rgba(0, 0, 0, 0.25);
+
+  &::before {
+    border-radius: 0 0 1em 1em;
+    width: 100%;
+    height: 50%;
+    transform-origin: center top;
+    transform: rotateX(180deg);
+    background: #333232
+      linear-gradient(180deg, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.4));
+    transition: 0.7s ease-in-out transform;
+  }
+
+  &:hover::before {
+    transform: rotateX(0);
+  }
+}
+h3 {
+  transform: perspective(1500px) rotateY(1deg);
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  transition: transform 1s ease 0s;
+  font-family: monospace;
+  &:hover {
+    transform: perspective(3000px) rotateY(150deg);
+  }
+}
+.logo {
+  transform: perspective(1500px) rotateY(1deg);
+  border-radius: 12rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  transition: transform 1s ease 0s;
+  width: 90px;
+  height: 90px;
+
+  &:hover {
+    transform: perspective(3000px) rotateY(150deg);
+  }
+}
+
+.sein {
+  color: #226595;
+  transform: rotateX(1deg) rotateZ(5deg);
+  transform-style: preserve-3d;
+  border-radius: 32px;
+  box-shadow: 1px 1px 0 1px #f9f9fb, -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+    28px 28px 28px 0 rgba(34, 33, 81, 0.25);
+  transition: 0.4s ease-in-out transform, 0.4s ease-in-out box-shadow;
+
+  &:hover {
+    transform: translate3d(0px, -16px, 0px) rotateX(51deg) rotateZ(10deg);
+    box-shadow: 1px 1px 0 1px #f9f9fb, -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+      54px 54px 28px -10px rgba(34, 33, 81, 0.15);
+  }
+}
+
+li {
+  transform: perspective(2000px) translate3d(0px, -66px, 198px) rotateX(-3deg)
+    scale3d(0.86, 0.75, 1) translateY(50px);
+  border-radius: 5px;
+  will-change: transform;
+  transition: 0.4s ease-in-out transform;
+
+  &:hover {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.weekly {
+  color: rgb(237, 84, 120);
+  font-size: 30px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.weekly-color {
+  color: #4dce15;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 25px;
+}
+
+
+/* Cartoon Runners BG */
+.cartoon-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+}
+.img-runner {
+  position: absolute;
+  left: -120px;       /* Start just off left */
+  width: 70px;        /* ကိုယ်ပိုင် imageအရွယ်လောက်ပြင်နိုင် */
+  height: auto;
+  bottom: 12vh;       /* Each image style ထဲမှာ တစ်ခုစီပြောင်းချင်တာ override */
+  animation-name: runRimg;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Keyframes for run animation */
+@keyframes runRimg {
+  0%   { transform: translateX(0) scale(1);    opacity: 1; }
+  7%   { opacity: 1; }
+  85%  { opacity: 1;}
+  100% { transform: translateX(120vw) scale(1.02); opacity: 0.9; }
+}
+/* CSS Style */
+.my-div {
+  width: 250px; /* width ကို မချင်ရင်အပြောင်းပြင်နိုင် */
+  height: 150px; /* height ကိုလည်း */
+  background-color: #222; /* မာ့ခ်အရောင်အလေး */
+  color: #fff; /* စာအရောင် */
+  padding: 20px;
+  border-radius: 12px; /* လေးလေး rounded corner */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+  font-family: 'Arial', sans-serif;
+  font-size: 1.2rem;
+  position: relative; /* မင်းအရေးကြီးတာများအတွက်အခြေစိုက် */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out; /* ဒီလိုနေရာတစ်ခါတုန်းမှာ animation */
+}
+
+/* အပေါ် effects ( hover ကုိသုံးမယ်ဆိုရင်) */
+.my-div:hover {
+  background-color: #444;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+}
+.last {
+  display: flex;             /* flexbox layout အဖြစ်စီ */
+  gap: 1.25rem;              /* item နှစ်ခု ကြားမှာ အသွားအလာ */
+  padding: 1.5rem;           /* container ပတ်လည် padding */
+  align-items: center;      /* item height အတူတူ */
+  width: 50%;
+  justify-content: center;
+}
+
+.my-div {
+  width: 50%;
+  flex: 1 1 0;               /* ပိုမိုအကျယ်ပြည့်စေ */
+  background: #1f1f1f;       /* dark background အရောင် */
+  color: #e8e8e8;            /* စာကိုးရာအရောင် */
+  padding: 1rem 1.25rem;     /* content padding */
+  border-radius: 12px;       /* စတုရန်းထောင့်ချောင်း */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); /* သက်တံဖြူ */
+  transition: transform 0.3s ease, background 0.25s ease; /* hover animation */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;        /* စာရှင်းလင်းမှု */
+  
+}
+
+.my-div:hover {
+  transform: translateY(-4px); /* hover ရဲ့ လျှော့ချပွဲ */
+  background: #2a2a2a;          /* hover background */
+}
+
+@media (max-width: 900px) {
+  .last {
+    flex-direction: column;   /* ဖုန်းတွေအတွက် stacked layout ပြောင်း */
+  }
+}
+.color2x{
+ background-color: #222;
+  color: #e2ecfa;
+  font-family: monospace;
+  font-size: 20px;
+  font-weight: 500;
+}
+.space{
+  margin-right: 10px;
+}
+
